@@ -1,0 +1,55 @@
+create DATABASE BookLibrary;
+
+
+
+
+CREATE table Books(
+BookID int PRIMARY KEY ,
+Title varchar(100) NOT NULL,
+AuthorID int,
+PublishedYear int,
+CopiesAvailable int,
+BookCategory varchar(100)NOT NULL 
+);
+
+
+CREATE table Authors(
+AuthorID INT PRIMARY KEY,
+FirstName VARCHAR(50) NOT NULL,
+LastName VARCHAR(50) NOT NULL,
+BirthYear INT);
+
+insert into Books (BookID, Title, AuthorID, PublishedYear,CopiesAvailable, BookCategory) VALUES
+(1,'HTML',1,2000,2,'computer ciance'),
+(2,'css',2,2000,3,'computer ciance'),
+(3,'javasicript',3,2000,4,'computer ciance'),
+(4,'c#',4,2000,5,'computer ciance'),
+(5,'SQL',5,2000,6,'computer ciance');
+
+insert into Authors(AuthorID,FirstName,LastName,BirthYear) values
+(1,'Ammar','alomari',1996),
+(2,'Ahmad','alomari',1993),
+(3,'Mohammad','alomari',2002),
+(4,'ALi','alomari',2000),
+(5,'RAMI','alomari',1980);
+
+select * from Books;
+select * from Authors;
+
+SELECT MAX(CopiesAvailable) FROM Books; 
+SELECT MIN(CopiesAvailable) FROM Books; 
+
+SELECT AVG(PublishedYear) FROM Books; 
+
+SELECT SUM(CopiesAvailable) AS TotalCopies FROM Books;
+
+TRUNCATE TABLE Books;
+
+ALTER TABLE Authors ADD Email VARCHAR(100)
+
+ALTER TABLE Authors ADD PhoneNumber VARCHAR(20)
+
+Drop table Authors;
+
+
+
