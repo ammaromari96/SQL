@@ -1,0 +1,96 @@
+create database AymanforTecksolutions;
+
+CREATE TABLE teacher (
+    Idteacher INT PRIMARY KEY,
+    teacherName VARCHAR(100) NOT NULL,
+    teacherEmail VARCHAR(100) NOT NULL,
+    teacherPhone VARCHAR(20) NOT NULL, 
+    teacherDepartment VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE teacherDetailes (
+    Idteacher INT PRIMARY KEY,
+    expirance VARCHAR(100) NOT NULL,
+    Specialization VARCHAR(100) NOT NULL,
+    TAddress VARCHAR(100) NOT NULL,
+    Salary INT NOT NULL,
+    FOREIGN KEY (Idteacher) REFERENCES teacher(Idteacher)
+);
+
+CREATE TABLE Courses (
+    courseId INT PRIMARY KEY,
+    CourseName VARCHAR(100) NOT NULL,
+    MaxStudents INT NOT NULL,
+    CourseCode VARCHAR(100) NOT NULL,
+    SubjectCategory VARCHAR(100) NOT NULL,
+    Idteacher INT,  
+    FOREIGN KEY (Idteacher) REFERENCES teacher(Idteacher) 
+);
+
+CREATE TABLE Students (
+    StudentId INT PRIMARY KEY,
+    Studentname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,  
+    class VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE StudentCourses (
+    StudentId INT,
+    courseId INT,
+    PRIMARY KEY (StudentId, courseId),  
+    FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
+    FOREIGN KEY (courseId) REFERENCES Courses(courseId)
+);
+
+
+INSERT INTO teacher (Idteacher, teacherName, teacherEmail, teacherPhone, teacherDepartment) VALUES
+(1, 'Ammar Ali', 'ammar.ali@example.com', '0501234567', 'Mathematics'),
+(2, 'Mohammad Abdullah', 'mohammad.abdullah@example.com', '0512345678', 'Physics'),
+(3, 'Rami Firas', 'rami.firas@example.com', '0523456789', 'Chemistry'),
+(4, 'Ali Mohammad', 'ali.mohammad@example.com', '0534567890', 'Computer Science'),
+(5, 'Abdullah Rami', 'abdullah.rami@example.com', '0545678901', 'Biology');
+
+
+INSERT INTO teacherDetailes (Idteacher, expirance, Specialization, TAddress, Salary) VALUES
+(1, '10 years', 'Algebra', 'Riyadh, Saudi Arabia', 12000),
+(2, '8 years', 'Quantum Physics', 'Jeddah, Saudi Arabia', 11000),
+(3, '12 years', 'Organic Chemistry', 'Dammam, Saudi Arabia', 13000),
+(4, '7 years', 'AI and Programming', 'Makkah, Saudi Arabia', 11500),
+(5, '9 years', 'Genetics', 'Medina, Saudi Arabia', 12500);
+
+
+INSERT INTO Courses (courseId, CourseName, MaxStudents, CourseCode, SubjectCategory, Idteacher) VALUES
+(1, 'Algebra', 30, 'MATH101', 'Mathematics', 1),
+(2, 'Quantum Physics', 25, 'PHY201', 'Physics', 2),
+(3, 'Organic Chemistry', 20, 'CHEM301', 'Chemistry', 3),
+(4, 'AI Fundamentals', 35, 'CS401', 'Computer Science', 4),
+(5, 'Genetics and Evolution', 22, 'BIO501', 'Biology', 5);
+
+
+INSERT INTO Students (StudentId, Studentname, email, phone, class) VALUES
+(1, 'Ammar Ali', 'ammar.ali@student.com', '0551234567', 'Grade 10'),
+(2, 'Mohammad Abdullah', 'mohammad.abdullah@student.com', '0562345678', 'Grade 11'),
+(3, 'Rami Firas', 'rami.firas@student.com', '0573456789', 'Grade 12'),
+(4, 'Ali Mohammad', 'ali.mohammad@student.com', '0584567890', 'Grade 10'),
+(5, 'Abdullah Rami', 'abdullah.rami@student.com', '0595678901', 'Grade 11');
+
+
+INSERT INTO StudentCourses (StudentId, courseId) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(1, 3),  
+(2, 4),  
+(3, 5),  
+(4, 2),  
+(5, 1);  
+
+
+
+
+
+
+
