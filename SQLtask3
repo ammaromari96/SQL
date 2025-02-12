@@ -1,13 +1,4 @@
-Ammar
-ammaromari88
-Invisible
 
-
-
-Hani.Aljarrah just landed. — Yesterday at 8:39 PM
-Farah Hatsuk joined the party. — Yesterday at 8:43 PM
-Toqa Khashashneh just landed. — Yesterday at 8:52 PM
-Farah Hatsuk — Today at 12:04 AM
 create database SchoolManagementSystem;
 use SchoolManagementSystem;
 
@@ -206,5 +197,3 @@ inner join attendance on Students.ID =  attendance.Students_ID
 where attendance.Type_of_absence = 'Absent' and attendance.attendance_date > '2024-01-01' and attendance.attendance_date < '2024-01-05'  ;
 
   
-message.txt
-6 KB
