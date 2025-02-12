@@ -1,0 +1,254 @@
+create database LibraryDatabaseManagementSystem;
+
+use LibraryDatabaseManagementSystem;
+
+create table libraryStaff(
+ID int Primary key,
+StaffName varchar(255),
+ContactInfo varchar(255),
+AssignedSection varchar(255),
+Employment date,
+);
+
+
+create table Books(
+ID int Primary key,
+Title varchar(255),
+Author varchar(255),
+Genre varchar(255),
+PublicationYear date,
+AvailabilityStatus varchar(255),
+CategoriesID int,
+ FOREIGN KEY (CategoriesID) REFERENCES Categories(ID)
+);
+
+create table members(
+ID int Primary key,
+MemberName varchar(255),
+contactInformation varchar(255),
+MembershipType  varchar(255),
+RegistrationDate date
+);
+
+
+
+
+create table Categories(
+ID int Primary key,
+CategoriesName varchar(255),
+Description varchar(255),
+);
+
+
+create table Reservations (
+ID int Primary key,
+ReservationDate date,
+Status varchar(255),
+MemberID int,
+BookID int,
+FOREIGN KEY (MemberID) REFERENCES members(ID),
+FOREIGN KEY (BookID) REFERENCES Books(ID)
+);
+
+create table Borrowing (
+ID int Primary key,
+Borrowingdate date,
+duedate date,
+returndate date,
+MemberID int,
+BookID int,
+FinancialfinesID int,
+FOREIGN KEY (MemberID) REFERENCES members(ID),
+FOREIGN KEY (BookID) REFERENCES Books(ID),
+FOREIGN KEY (FinancialfinesID) REFERENCES Financialfines(ID)
+);
+
+create table Financialfines  (
+ID int Primary key,
+amount int,
+PaymentStatus varchar(255)
+);
+
+
+INSERT INTO libraryStaff (ID, StaffName, ContactInfo, AssignedSection, Employment) VALUES
+(1, 'Ahmad', '123456789', 'Science', '2023-06-15'),
+(2, 'Mohammad', '987654321', 'Technology', '2022-09-10'),
+(3, 'Ali', '567891234', 'History', '2021-03-25'),
+(4, 'Abdullah', '345678912', 'Arts', '2020-11-30'),
+(5, 'Ammar', '112233445', 'Fiction', '2019-07-21'),
+(6, 'Firas', '998877665', 'Science', '2018-02-14'),
+(7, 'Anas', '554433221', 'Technology', '2017-10-03'),
+(8, 'Hani', '776655443', 'History', '2016-05-22'),
+(9, 'Omar', '665544332', 'Arts', '2015-08-17'),
+(10, 'Khaled', '443322110', 'Fiction', '2014-12-01'),
+(11, 'Yousef', '223344556', 'Science', '2013-07-09'),
+(12, 'Tariq', '998822334', 'Technology', '2012-11-23'),
+(13, 'Sami', '778899221', 'History', '2011-04-11'),
+(14, 'Hassan', '334455667', 'Arts', '2010-06-29'),
+(15, 'Zaid', '112244668', 'Fiction', '2009-01-05');
+
+-- Insert data into Categories
+INSERT INTO Categories (ID, CategoriesName, Description) VALUES
+(1, 'Science Fiction', 'Books about futuristic concepts'),
+(2, 'Technology', 'Books about modern technology'),
+(3, 'History', 'Books about historical events'),
+(4, 'Arts', 'Books about artistic subjects'),
+(5, 'Fiction', 'General fiction books'),
+(6, 'Biography', 'Books about real people'),
+(7, 'Philosophy', 'Books about philosophy'),
+(8, 'Business', 'Books about finance and management'),
+(9, 'Self-help', 'Books for personal development'),
+(10, 'Mystery', 'Books about detective stories'),
+(11, 'Fantasy', 'Books with magical elements'),
+(12, 'Poetry', 'Books with poetic works'),
+(13, 'Health', 'Books about fitness and medicine'),
+(14, 'Psychology', 'Books about human mind and behavior'),
+(15, 'Politics', 'Books about government and policies');
+
+-- Insert data into Books
+INSERT INTO Books (ID, Title, Author, Genre, PublicationYear, AvailabilityStatus, CategoriesID) VALUES
+(1, 'Database Fundamentals', 'John Doe', 'Technology', '2018-04-10', 'Available', 2),
+(2, 'SQL for Beginners', 'Jane Smith', 'Technology', '2020-07-22', 'Borrowed', 2),
+(3, 'C# Programming', 'Robert Martin', 'Technology', '2019-09-15', 'Available', 2),
+(4, 'History of Civilizations', 'William Brown', 'History', '2017-05-30', 'Available', 3),
+(5, 'Modern Art Trends', 'Emily Davis', 'Arts', '2021-02-14', 'Available', 4),
+(6, 'Artificial Intelligence', 'Andrew Ng', 'Technology', '2018-06-10', 'Available', 2),
+(7, 'The Great War', 'James Wilson', 'History', '2015-08-05', 'Available', 3),
+(8, 'The Psychology of Mind', 'Daniel Kahneman', 'Psychology', '2016-11-20', 'Available', 14),
+(9, 'Secrets of the Universe', 'Neil Tyson', 'Science Fiction', '2014-05-12', 'Available', 1),
+(10, 'Poetry Collection', 'Rumi', 'Poetry', '2013-01-01', 'Available', 12),
+(11, 'Business Strategies', 'Peter Drucker', 'Business', '2017-09-23', 'Available', 8),
+(12, 'Self-improvement Guide', 'Tony Robbins', 'Self-help', '2019-11-13', 'Available', 9),
+(13, 'Fantasy World', 'J.K. Rowling', 'Fantasy', '2000-07-08', 'Available', 11),
+(14, 'Mystery of the Lost City', 'Agatha Christie', 'Mystery', '2005-04-30', 'Available', 10),
+(15, 'The Art of Politics', 'Noam Chomsky', 'Politics', '2010-10-10', 'Available', 15);
+
+-- Insert data into Members
+INSERT INTO Members (ID, MemberName, contactInformation, MembershipType, RegistrationDate) VALUES
+(1, 'Firas', '111222333', 'Student', '2025-01-01'),
+(2, 'Anas', '222333444', 'Regular', '2025-01-03'),
+(3, 'Hani', '333444555', 'Premium', '2025-01-05'),
+(4, 'Omar', '9876543210', 'Student', '2025-01-07'),
+(5, 'Khaled', '555666777', 'Regular', '2025-01-09'),
+(6, 'Yousef', '999888777', 'Student', '2025-01-11'),
+(7, 'Tariq', '444333222', 'Regular', '2025-01-13'),
+(8, 'Sami', '666777888', 'Premium', '2025-01-15'),
+(9, 'Hassan', '777666555', 'Student', '2025-01-17'),
+(10, 'Zaid', '555444333', 'Regular', '2025-01-19'),
+(11, 'Ahmad', '112233445', 'Premium', '2025-01-21'),
+(12, 'Mohammad', '223344556', 'Student', '2025-01-23'),
+(13, 'Ali', '334455667', 'Regular', '2025-01-25'),
+(14, 'Abdullah', '445566778', 'Premium', '2025-01-27'),
+(15, 'Ammar', '556677889', 'Student', '2025-02-01');
+
+
+-- Insert data into Reservations
+INSERT INTO Reservations (ID, ReservationDate, Status, MemberID, BookID) VALUES
+(1, '2025-01-01', 'Confirmed', 1, 1),
+(2, '2025-01-02', 'Pending', 2, 2),
+(3, '2025-01-03', 'Cancelled', 3, 3),
+(4, '2025-01-04', 'Confirmed', 4, 4),
+(5, '2025-01-05', 'Confirmed', 5, 5),
+(6, '2025-01-06', 'Confirmed', 6, 6),
+(7, '2025-01-07', 'Pending', 7, 7),
+(8, '2025-01-08', 'Cancelled', 8, 8),
+(9, '2025-01-09', 'Confirmed', 9, 9),
+(10, '2025-01-10', 'Confirmed', 10, 10),
+(11, '2025-01-11', 'Pending', 11, 11),
+(12, '2025-01-12', 'Cancelled', 12, 12),
+(13, '2025-01-13', 'Confirmed', 13, 13),
+(14, '2025-01-14', 'Confirmed', 14, 14),
+(15, '2025-01-15', 'Confirmed', 15, 15);
+
+
+INSERT INTO Borrowing (ID, Borrowingdate, duedate, returndate, MemberID, BookID, FinancialfinesID) VALUES
+(1, '2024-01-01', '2024-01-10', '2024-01-09', 1, 1, NULL),
+(2, '2024-01-02', '2024-01-12', '2024-01-15', 2, 2, 1),
+(3, '2024-01-03', '2024-01-13', NULL, 3, 3, 2),
+(4, '2024-01-04', '2024-01-14', '2024-01-14', 4, 4, NULL),
+(5, '2024-01-05', '2024-01-15', '2024-01-16', 5, 5, 3),
+(6, '2024-01-06', '2024-01-16', NULL, 6, 6, 4),
+(7, '2024-01-07', '2024-01-17', '2024-01-18', 7, 7, NULL),
+(8, '2024-01-08', '2024-01-18', NULL, 8, 8, 5),
+(9, '2024-01-09', '2024-01-19', '2024-01-20', 9, 9, NULL),
+(10, '2024-01-10', '2024-01-20', NULL, 10, 10, 6),
+(11, '2024-01-11', '2024-01-21', '2024-01-22', 11, 11, NULL),
+(12, '2024-01-12', '2024-01-22', '2024-01-23', 12, 12, 7),
+(13, '2024-01-13', '2024-01-23', NULL, 13, 13, 8),
+(14, '2024-01-14', '2024-01-24', '2024-01-25', 14, 14, NULL),
+(15, '2024-01-15', '2024-01-25', NULL, 15, 15, 9);
+
+-- Insert data into Financialfines
+INSERT INTO Financialfines (ID, amount, PaymentStatus) VALUES
+(1, 50, 'Unpaid'),
+(2, 30, 'Paid'),
+(3, 40, 'Unpaid'),
+(4, 20, 'Paid'),
+(5, 60, 'Unpaid'),
+(6, 25, 'Paid'),
+(7, 35, 'Unpaid'),
+(8, 45, 'Paid'),
+(9, 55, 'Unpaid'),
+(10, 30, 'Paid'),
+(11, 50, 'Unpaid'),
+(12, 20, 'Paid'),
+(13, 40, 'Unpaid'),
+(14, 60, 'Paid'),
+(15, 20, 'Paid');
+
+select * from members where RegistrationDate ='2025-01-01';
+
+select * from Books where Title ='SQL for Beginners'; 
+
+ALTER TABLE Members ADD Email VARCHAR(100);
+
+INSERT INTO Members (ID, MemberName, contactInformation, MembershipType,Email) VALUES
+(16, 'Firas', '111222333', 'Student','amar.alomari@gmail.com')
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType
+FROM Members
+INNER JOIN Reservations ON Members.ID = Reservations.MemberID;
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType
+FROM Members
+INNER JOIN Borrowing ON Members.ID = Borrowing.MemberID
+INNER JOIN Books ON Borrowing.BookID = Books.ID
+WHERE Books.Title = 'SQL for Beginners';
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType
+FROM Members
+INNER JOIN Borrowing ON Members.ID = Borrowing.MemberID
+INNER JOIN Books ON Borrowing.BookID = Books.ID
+WHERE Books.Title = 'C# Programming' AND Borrowing.returndate IS NOT NULL;
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType, Borrowing.returndate, Borrowing.duedate
+FROM Members
+INNER JOIN Borrowing ON Members.ID = Borrowing.MemberID
+WHERE Borrowing.returndate > Borrowing.duedate;
+
+SELECT Books.ID, Books.Title, COUNT(Borrowing.BookID) AS BorrowCount
+FROM Books
+INNER JOIN Borrowing ON Books.ID = Borrowing.BookID
+GROUP BY Books.ID, Books.Title
+HAVING COUNT(Borrowing.BookID) > 3;
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType
+FROM Members
+INNER JOIN Borrowing ON Members.ID = Borrowing.MemberID
+WHERE Borrowing.Borrowingdate BETWEEN '2024-01-01' AND '2024-01-10';
+
+SELECT COUNT(*) AS TotalBooks FROM Books;
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType
+FROM Members
+INNER JOIN Borrowing ON Members.ID = Borrowing.MemberID
+WHERE Borrowing.returndate IS NULL;
+
+SELECT  Members.ID, Members.MemberName, Members.contactInformation, Members.MembershipType
+FROM Members
+INNER JOIN Borrowing ON Members.ID = Borrowing.MemberID
+INNER JOIN Books ON Borrowing.BookID = Books.ID
+INNER JOIN Categories ON Books.CategoriesID = Categories.ID
+WHERE Categories.CategoriesName = 'Science Fiction';
+
+
